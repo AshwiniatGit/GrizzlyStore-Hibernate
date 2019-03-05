@@ -1,5 +1,14 @@
 package com.cts.grizzlystore.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PRODUCT")
 public class Product {
 	private String id;
 	private String category;
@@ -36,6 +45,8 @@ public class Product {
 		this.offer = offer;
 	}
 
+	@Id
+	@Column
 	public String getId() {
 		return id;
 	}
@@ -44,6 +55,9 @@ public class Product {
 		this.id = id;
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	@Column
 	public String getCategory() {
 		return category;
 	}
@@ -52,6 +66,7 @@ public class Product {
 		this.category = category;
 	}
 
+	@Column
 	public String getName() {
 		return name;
 	}
@@ -60,6 +75,7 @@ public class Product {
 		this.name = name;
 	}
 
+	@Column
 	public String getDescription() {
 		return description;
 	}
@@ -68,6 +84,7 @@ public class Product {
 		this.description = description;
 	}
 
+	@Column
 	public float getPrice() {
 		return price;
 	}
@@ -76,6 +93,7 @@ public class Product {
 		this.price = price;
 	}
 
+	@Column
 	public String getBrand() {
 		return brand;
 	}
@@ -84,6 +102,7 @@ public class Product {
 		this.brand = brand;
 	}
 
+	@Column
 	public float getRating() {
 		return rating;
 	}
@@ -92,6 +111,7 @@ public class Product {
 		this.rating = rating;
 	}
 
+	@Column
 	public float getOffer() {
 		return offer;
 	}

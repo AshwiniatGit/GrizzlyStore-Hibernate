@@ -12,8 +12,12 @@ public class Main {
 		System.out.println("bsknvbkjl");
 		
 		UserService userService = UserServiceImpl.getInstance();
+		LoginService loginService = LoginServiceImpl.getInstance();
 		User user = new User("1","Ashwini","123","U",1,"7623023024","Pune","Intern");
-		System.out.println(userService.getUser("1"));
+		loginService.resetStatus("1");
+		System.out.println(loginService.getUserStatus("1")+"staus");
+		loginService.inceraseAttempt("1", loginService.getUserStatus("1"));
+		System.out.println(loginService.getUserStatus("1")+"staus");
 		
 	}
 }

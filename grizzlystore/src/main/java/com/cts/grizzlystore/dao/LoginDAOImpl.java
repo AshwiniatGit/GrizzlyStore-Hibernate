@@ -11,8 +11,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.cts.grizzlystore.bean.Employee;
 import com.cts.grizzlystore.bean.User;
+import com.cts.grizzlystore.service.UserService;
+import com.cts.grizzlystore.service.UserServiceImpl;
 import com.cts.grizzlystore.util.HibernateUtil;
 
 public class LoginDAOImpl implements LoginDAO {
@@ -110,11 +111,64 @@ public class LoginDAOImpl implements LoginDAO {
 	@Override
 	public void resetStatus(String id) {
 		
+		UserService userService = UserServiceImpl.getInstance();
+		User user = userService.getUser(id);
+		user.setStatus(0);
+		Session session= null;
+		Transaction transaction = null;
+		try{
+		session = sessionFactory.openSession();
+		transaction = session.getTransaction();
+		
+		transaction.begin();
+		session.update(user);//insert 
+		transaction.commit();
+		System.out.println("Updated");
+		
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			if(transaction!=null)
+				transaction.rollback();
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
+		
 		
 	}
 
 	@Override
 	public void inceraseAttempt(String id, int val) {
+		
+		UserService userService = UserServiceImpl.getInstance();
+		User user = userService.getUser(id);
+		user.setStatus(val+1);
+		Session session= null;
+		Transaction transaction = null;
+		try{
+		session = sessionFactory.openSession();
+		transaction = session.getTransaction();
+		
+		transaction.begin();
+		session.update(user);//insert 
+		transaction.commit();
+		System.out.println("Updated");
+		
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			if(transaction!=null)
+				transaction.rollback();
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
+		
 		
 		
 	}
